@@ -226,10 +226,9 @@ router.put('/replacePlayer', async (req, res) => {
     if (!currentUser || !currentUser.squad || currentUser.squad.length === 0) {
       return res.status(404).json({ message: "User's squad not found" });
     }
-    console.log(oldPlayerName)
+    
     // Find the index of the player by their name
     const index = currentUser.squad.findIndex(player => player.playerName === oldPlayerName);
-    console.log("Player Index: ", index);
 
     if (index === -1) {
       return res.status(404).json({ message: "Old player not found in squad" });

@@ -73,6 +73,7 @@ export const matchResult = async (home, away) => {
 
 export const startTournament = async () => {
   try {
+    getDailyMoney()
     let userCount = await User.countDocuments({});
     let i = 0;
     while (userCount % 16 != 0) {
@@ -149,8 +150,8 @@ export const eighthFinals = async () => {
     for (let j = 0; j<winners.length; j++){
       winners[j].quarterFinals = []
       winners[j].quarterFinals.push(Math.floor(j / 2) + 1)
-      winners[j].quarterFinals.push("0")
-      winners[j].quarterFinals.push("0")
+      winners[j].quarterFinals.push(0)
+      winners[j].quarterFinals.push(0)
       await winners[j].save();
     }
   }
@@ -195,6 +196,8 @@ export const quarterFinals = async () => {
       winners[j].money+=50;
       winners[j].semiFinals = []
       winners[j].semiFinals.push(Math.floor(j / 2) + 1)
+      winners[j].semiFinals.push(0)
+      winners[j].semiFinals.push(0)
       await winners[j].save();
     }
   }
@@ -240,6 +243,8 @@ export const semiFinals = async () => {
       winners[j].money+=100;
       winners[j].finale = []
       winners[j].finale.push(Math.floor(j / 2) + 1)
+      winners[j].finale.push(0)
+      winners[j].finale.push(0)
       await winners[j].save();
     }
   }
