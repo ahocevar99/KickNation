@@ -43,7 +43,7 @@ router.post("/login", (req, res) => {
             }, 'verySecretKey', {expiresIn: '2h'})
 
             req.user = user;
-            res.status(202).header('Authorization', `Bearer ${token}`).json({ message: "success", user: { username: user.username, clubName: user.clubName } });
+            res.status(202).header('Authorization', `Bearer ${token}`).json({ message: "Successful login", user: { username: user.username, clubName: user.clubName } });
           } else {
             res.json("Wrong username or password");
           }
@@ -104,7 +104,6 @@ router.post("/register", async (req, res) => {
     };
     const user = await User.create(newUser);
     if (user) {
-      console.log("now")
       return res.status(201).json({message: "Successful signup"});
     } else {
       return res.status(500).json({message: "There was a problem saving your data"});
