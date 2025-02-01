@@ -1,0 +1,42 @@
+.player-container {
+    position: relative;
+    width: 15vh;
+    height: 15vh;
+    display: inline-block;
+}
+
+.playerShirt {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.player-name, .player-rating, .player-country {
+    color: black;
+    z-index: 2;
+    font-size: 10px;
+    position: absolute;
+}
+
+.player-name {
+    top: 14%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.player-rating {
+    top: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2.5rem;
+}
+
+.player-country {
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1rem;
+    text-align: center;
+}

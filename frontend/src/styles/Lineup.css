@@ -1,0 +1,9 @@
+.soccer-image {
+   height: 80vh;
+   position: absolute;
+   left: 40px;
+   bottom: 50px;
+   border-radius: 10px;
+   border: solid 2px;
+   z-index: -1;
+}
