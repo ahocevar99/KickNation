@@ -1,9 +1,11 @@
 .soccer-image {
-   height: 80vh;
-   position: absolute;
+   max-height: 800px;
+   position: relative;
+   top: 100px;
    left: 40px;
    bottom: 50px;
    border-radius: 10px;
    border: solid 2px;
    z-index: -1;
+   min-height: 800px;
 }

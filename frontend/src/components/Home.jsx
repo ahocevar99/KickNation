@@ -1,5 +1,6 @@
 import React from 'react'
 import Lineup from './Lineup'
+import Buy from './Buy'
 import Navigation from './Navigation'
 import '../styles/Navigation.css'
 
@@ -9,6 +10,7 @@ const Home = () => {
         <div className='nav-container'>
             <Navigation />
             <Lineup />
+            <Buy />
         </div>
     )
 }

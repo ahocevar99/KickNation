@@ -32,6 +32,7 @@ const protect = asyncHandler (async (req,res,next) => {
 
 router.post("/login", (req, res) => {
     const { username, password } = req.body;
+    console.log(req.body)
     User.findOne({ username: username }).then((user) => {
       if (user) {
         bcrypt.compare(password, user.password, (err, response) => {

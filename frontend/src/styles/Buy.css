@@ -1,0 +1,100 @@
+.buy-container {
+    width: 500px;
+    height: 650px;
+    border: 1px solid rgb(0, 209, 35);;
+    position: absolute;
+    right: 40px;
+    top: 230px;
+    overflow: hidden;
+    overflow-y: hidden;
+    border-radius: 10px;
+}
+
+.money-counter {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    font-size: 2rem;
+    color: rgb(231, 231, 231);
+}
+
+.new-pack {
+    position: absolute;
+    width: 140px;
+    top: 130px;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.new-pack button {
+    width: 140px;
+    height: 50px;
+    cursor: pointer;
+    font-size: 17px;
+    background-color: inherit;
+    color: rgb(231, 231, 231);
+    border-radius: 15px;
+    border: 3px solid rgb(0, 209, 35);
+}
+
+.new-pack button:hover {
+    border: 3px solid rgb(0, 138, 23);
+}
+
+.new-pack p {
+    text-align: center;
+    font-size: 1.2rem;
+    color: rgb(231, 231, 231);
+}
+
+.new-player-container {
+    position: relative;
+    top: 240px;
+}
+.new-player-container img{
+    position: absolute;
+    width: 320px;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.new-player-name {
+    position: absolute;
+    font-size: 1.6rem;
+    top: 30px;
+    width: 500px;
+    text-align: center;
+}
+
+.new-player-rating {
+    position: absolute;
+    font-size: 3.3rem;
+    top: 80px;
+    width: 500px;
+    text-align: center;
+}
+
+.new-player-country {
+    position: absolute;
+    font-size: 1.3rem;
+    top: 230px;
+    width: 500px;
+    text-align: center;
+}
+
+.new-player-arrows {
+    position: absolute;
+    bottom: 10px;
+    color: rgb(231, 231, 231);
+    font-size: 3rem;
+    width: 100px;
+    display: flex;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.new-player-arrows i {
+    cursor: pointer;
+}
+
+
