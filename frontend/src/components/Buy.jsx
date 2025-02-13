@@ -2,20 +2,20 @@ import React, { useState, useEffect } from 'react'
 import '../styles/Buy.css'
 import { useLocation } from 'react-router-dom'
 import axios from 'axios'
-import NewPlayer from './NewPlayer';
+import NewPlayer from './NewPlayer.jsx';
 
 
 const Buy = () => {
     const [money, setMoney] = useState();
     const [newPlayers, setNewPlayers] = useState([]);
+    const [displayedPlayer, switchDisplayedPlayer] = useState(0);
     const location = useLocation();
     const { username } = location.state || {};
 
     const buyPack = async () => {
         const response = await axios.get(`http://localhost:3000/buyPack?username=${username}`);
-        console.log(response.data.squad)
         setNewPlayers(response.data.squad)
-
+        renderPlayer(displayedPlayer);
     }
 
     useEffect(() => {
@@ -26,6 +26,15 @@ const Buy = () => {
         getMoney();
     }, [buyPack])
 
+    const changePlayer = () => {
+        return (displayedPlayer == 0 ? switchDisplayedPlayer(1) : switchDisplayedPlayer(0))    
+    } 
+
+    const renderPlayer = (displayedPlayer) => {
+        return newPlayers.length > 0 ? (
+        <NewPlayer newPlayerInfo={newPlayers[displayedPlayer]} newChosenPlayer={newChosenPlayerBuy} />
+        ) : <div></div>
+    }
 
     return (
         <div className='buy-container'>
@@ -36,14 +45,12 @@ const Buy = () => {
                 <button onClick={buyPack}>New Pack</button>
                 <p>(100 $)</p>
             </div>
-            <div className='player-list'>
-                {newPlayers.slice(0, 2).map((player, index) => (
-                    <NewPlayer key={index} newPlayerInfo={player} index={index} />
-                ))}
+            <div>
+                {renderPlayer(displayedPlayer)}
             </div>
-            <div className='new-player-arrows'>
-                <i className="fa-solid fa-arrow-left"></i>
-                <i className="fa-solid fa-arrow-right"></i>
+            <div className="new-player-arrows">
+                <i className="fa-solid fa-arrow-left" onClick={() => changePlayer()}></i>
+                <i className="fa-solid fa-arrow-right" onClick={() => changePlayer()}></i>
             </div>
         </div>
     )

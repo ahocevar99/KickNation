@@ -3,9 +3,22 @@ import playerShirt from '../assets/shirt-player.png';
 import '../styles/Player.css';
 import PropTypes from 'prop-types';
 
+
+function allowDrop(event) {
+  event.preventDefault();
+}
+
 const Player = ({playerInfo, index}) => {
+
+  const dragFunction = (event) => {
+    event.preventDefault()
+    console.log(playerInfo.playerName)
+    console.log(event.dataTransfer.getData("plain/text"))
+    
+  }
+  
   return (
-    <div className = {`player-container pc-${index}`}>
+    <div className = {`player-container pc-${index}`} onDrop={dragFunction} onDragOver={allowDrop}>
       <img src={playerShirt} alt="Player Shirt" className='playerShirt'/>
       <p className='player-name'>{playerInfo.playerName}</p>
       <p className='player-rating'>{playerInfo.rating}</p>

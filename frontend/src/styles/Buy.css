@@ -50,6 +50,7 @@
 .new-player-container {
     position: relative;
     top: 240px;
+    cursor: move;
 }
 .new-player-container img{
     position: absolute;
@@ -85,16 +86,25 @@
 .new-player-arrows {
     position: absolute;
     bottom: 10px;
-    color: rgb(231, 231, 231);
     font-size: 3rem;
     width: 100px;
     display: flex;
     left: 50%;
     transform: translate(-50%);
+    color: rgb(224, 224, 224)
 }
 
 .new-player-arrows i {
     cursor: pointer;
+}
+
+
+.npc-0 {
+    visibility: visible;
+}
+
+.npc-1 {
+    visibility: hidden;
 }
 
 
