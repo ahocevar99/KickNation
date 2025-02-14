@@ -32,7 +32,7 @@ const Buy = () => {
 
     const renderPlayer = (displayedPlayer) => {
         return newPlayers.length > 0 ? (
-        <NewPlayer newPlayerInfo={newPlayers[displayedPlayer]} newChosenPlayer={newChosenPlayerBuy} />
+        <NewPlayer newPlayerInfo={newPlayers[displayedPlayer]} />
         ) : <div></div>
     }
 

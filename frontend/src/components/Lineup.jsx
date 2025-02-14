@@ -4,12 +4,14 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom'
 import Player from './Player';
-import PropTypes from 'prop-types';
+import ReplacePlayers from './ReplacePlayers';
 
 const Lineup = () => {
   const [players, setPlayers] = useState ([]);
   const location = useLocation();
   const {username} = location.state || {};
+
+  const [bothPlayers, setBothPlayers] = useState([])
 
   useEffect(() => {
     const fetchTeam = async () => {
@@ -18,16 +20,23 @@ const Lineup = () => {
     }
     fetchTeam()
   }, []);
+
+  const replacedPlayers = (replacedPlayersData) => {
+    setBothPlayers(replacedPlayersData)
+  }
   const renderPlayers = (players) => {
     return players.slice(0, 11).map((player, index) => (
-      <Player key={index} playerInfo={player} index = {index}/>
+      <Player key={index} playerInfo={player} index = {index} replacedPlayers = {replacedPlayers}/>
     ));
   };
+
+  //<ReplacePlayers username={username} bothPlayers={bothPlayers}/>
 
   return (
       <div>
         <img src={soccerField} alt="Soccer Field" className="soccer-image" />
         {renderPlayers(players)}
+        <ReplacePlayers username={username} bothPlayers={bothPlayers}/>
       </div>
   )
 }

@@ -8,4 +8,19 @@
    border: solid 2px;
    z-index: -1;
    min-height: 800px;
+   width: 1200px;
+}
+
+/* REPLACE PLAYERS STYLING */
+
+.replace-players-container {
+   width: 800px;
+   height: 500px;
+   position: absolute;
+   top: 20%;
+   left: 240px;
+   background-color: aqua;
+   border-radius: 20px;
+   border: 1px solid red;
+   z-index: 2;
 }

@@ -8,13 +8,14 @@ function allowDrop(event) {
   event.preventDefault();
 }
 
-const Player = ({playerInfo, index}) => {
+const Player = ({playerInfo, index, replacedPlayers}) => {
 
   const dragFunction = (event) => {
     event.preventDefault()
-    console.log(playerInfo.playerName)
-    console.log(event.dataTransfer.getData("plain/text"))
-    
+    const bothPlayers = [];
+    bothPlayers.push (playerInfo)
+    bothPlayers.push (JSON.parse(event.dataTransfer.getData("plain/text")))
+    replacedPlayers (bothPlayers)
   }
   
   return (
@@ -35,7 +36,8 @@ Player.propTypes = {
         rating: PropTypes.number.isRequired,
         position: PropTypes.string.isRequired,
     }).isRequired,
-    index: PropTypes.number.isRequired
+    index: PropTypes.number.isRequired,
+    replacedPlayers: PropTypes.func.isRequired
 }
 
 export default Player;

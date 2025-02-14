@@ -219,10 +219,9 @@ router.get('/getData', async (req, res) => {
 
 router.put('/replacePlayer', async (req, res) => {
   try {
-    const { username, oldPlayerName, newPlayerName, newPlayerRating, newPlayerCountry, newPlayerPosition } = req.query;
+    const { username, oldPlayerName, newPlayerName, newPlayerRating, newPlayerCountry, newPlayerPosition } = req.body;
     
     const currentUser = await User.findOne({ username });
-
     if (!currentUser || !currentUser.squad || currentUser.squad.length === 0) {
       return res.status(404).json({ message: "User's squad not found" });
     }
