@@ -1,4 +1,10 @@
 import { User } from "./models/UserModel.js";
+import countries from './countries.json'
+
+getCountryCode = (country) => {
+  const country = countries.find(c => c.country.toLowerCase() === country.toLowerCase())
+  return country ? country.abbreviation : "XX"
+} 
 
 export const newPlayer = async () => {
   while (true) {
@@ -11,9 +17,10 @@ export const newPlayer = async () => {
       const firstName = data.results[0].name.first;
       const lastName = data.results[0].name.last;
       const country = data.results[0].location.country;
+      const countryCode = getCountryCode(country);
       const regex = /^[A-Za-zČčĆćĐđŠšŽž\s]+$/;
       if (regex.test(firstName) && regex.test(lastName)) {
-        return { name: `${firstName} ${lastName}`, country: country };
+        return { name: `${firstName} ${lastName}`, country: country, countryCode: countryCode };
       }
     }
   }

@@ -8,7 +8,7 @@ function allowDrop(event) {
   event.preventDefault();
 }
 
-const Player = ({playerInfo, index, replacedPlayers}) => {
+const Player = ({playerInfo, index, replacedPlayers, customClass}) => {
 
   const dragFunction = (event) => {
     event.preventDefault()
@@ -19,7 +19,7 @@ const Player = ({playerInfo, index, replacedPlayers}) => {
   }
   
   return (
-    <div className = {`player-container pc-${index}`} onDrop={dragFunction} onDragOver={allowDrop}>
+    <div className = {`player-container pc-${index} ${customClass}`} onDrop={dragFunction} onDragOver={allowDrop}>
       <img src={playerShirt} alt="Player Shirt" className='playerShirt'/>
       <p className='player-name'>{playerInfo.playerName}</p>
       <p className='player-rating'>{playerInfo.rating}</p>
@@ -36,8 +36,9 @@ Player.propTypes = {
         rating: PropTypes.number.isRequired,
         position: PropTypes.string.isRequired,
     }).isRequired,
-    index: PropTypes.number.isRequired,
-    replacedPlayers: PropTypes.func.isRequired
+    index: PropTypes.number,
+    replacedPlayers: PropTypes.func,
+    customClass: PropTypes.string
 }
 
 export default Player;

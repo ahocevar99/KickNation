@@ -8,7 +8,6 @@ import '../styles/Navigation.css'
 const Home = () => {
     return (
         <div className='nav-container'>
-            <Navigation />
             <Lineup />
             <Buy />
         </div>

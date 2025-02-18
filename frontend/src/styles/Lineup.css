@@ -1,7 +1,7 @@
 .soccer-image {
    max-height: 800px;
    position: relative;
-   top: 100px;
+   top: 50px;
    left: 40px;
    bottom: 50px;
    border-radius: 10px;
@@ -23,4 +23,17 @@
    border-radius: 20px;
    border: 1px solid red;
    z-index: 2;
+   display: block;
+}
+
+.replace-players-button {
+   position: absolute;
+   top: 30px;
+   right: 30px;
+   cursor: pointer;
+   background-color: beige;
+   padding: 1rem;
+   font-size: 1.3rem;
+   border-radius: 1.2rem;
+   
 }

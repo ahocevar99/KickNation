@@ -12,6 +12,7 @@ const Buy = () => {
     const location = useLocation();
     const { username } = location.state || {};
 
+
     const buyPack = async () => {
         const response = await axios.get(`http://localhost:3000/buyPack?username=${username}`);
         setNewPlayers(response.data.squad)
@@ -32,7 +33,7 @@ const Buy = () => {
 
     const renderPlayer = (displayedPlayer) => {
         return newPlayers.length > 0 ? (
-        <NewPlayer newPlayerInfo={newPlayers[displayedPlayer]} />
+        <NewPlayer newPlayerInfo={newPlayers[displayedPlayer]}/>
         ) : <div></div>
     }
 

@@ -19,7 +19,7 @@ const Lineup = () => {
       setPlayers(response.data.squad);
     }
     fetchTeam()
-  }, []);
+  });
 
   const replacedPlayers = (replacedPlayersData) => {
     setBothPlayers(replacedPlayersData)
@@ -36,7 +36,10 @@ const Lineup = () => {
       <div>
         <img src={soccerField} alt="Soccer Field" className="soccer-image" />
         {renderPlayers(players)}
-        <ReplacePlayers username={username} bothPlayers={bothPlayers}/>
+        {bothPlayers.length>0? 
+          <ReplacePlayers username={username} bothPlayers={bothPlayers} setBothPlayers={setBothPlayers}/>:
+          <div></div>
+        }
       </div>
   )
 }

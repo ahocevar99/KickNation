@@ -2,10 +2,10 @@ import React from 'react'
 import  '../styles/Lineup.css'
 import axios from 'axios'
 import PropTypes from 'prop-types'
+import Player from './Player'
 
 
-
-const ReplacePlayers = ({username, bothPlayers}) => {
+const ReplacePlayers = ({username, bothPlayers, setBothPlayers}) => {
     const replacePlayerFunction = async () => {
         try {
             const response = await axios.put ("http://localhost:3000/replacePlayer", {
@@ -17,14 +17,18 @@ const ReplacePlayers = ({username, bothPlayers}) => {
                 newPlayerPosition: bothPlayers[1].position
             }
             )
-            console.log(response.data.message)
+            setBothPlayers([])
         } catch (error){
             console.log("Erroe replacing players: " + error)
         }
     }
   return (
     <div className='replace-players-container'>
-      <button onClick={replacePlayerFunction}>Klikni</button>
+        <div className='replace-players-flex'>
+            <Player playerInfo={bothPlayers[0]} customClass={"replace-player-0"}/>
+            <Player playerInfo={bothPlayers[1]} customClass={"replace-player-1"}/>
+        </div>
+        <button onClick={replacePlayerFunction} className='replace-players-button'>Replace Players</button>
     </div>
   )
 }

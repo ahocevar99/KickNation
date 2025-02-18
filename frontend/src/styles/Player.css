@@ -8,57 +8,57 @@
 }
 
 .pc-0 {
-    top: 430px;
+    top: 450px;
     left: 30px;
 }
 
 .pc-1 {
-    top: 133px;
+    top: 153px;
     left: 250px;
 }
 
 .pc-2 {
-    top: 300px;
+    top: 320px;
     left: 200px;
 }
 
 .pc-3 {
-    top: 565px;
+    top: 585px;
     left: 200px;
 }
 
 .pc-4 {
-    top: 735px;
+    top: 755px;
     left: 250px;
 }
 
 .pc-5 {
-    top: 200px;
+    top: 220px;
     left: 600px;
 }
 
 .pc-6 {
-    top: 430px;
+    top: 450px;
     left: 520px;
 }
 
 .pc-7 {
-    top: 670px;
+    top: 690px;
     left: 600px;
 }
 
 .pc-8 {
-    top: 150px;
+    top: 170px;
     left: 950px;
 }
 
 .pc-9 {
-    top: 430px;
+    top: 450px;
     left: 900px;
 }
 
 .pc-10 {
-    top: 720px;
+    top: 740px;
     left: 950px;
 }
 
@@ -72,12 +72,12 @@
 .player-name, .player-rating, .player-country, .player-position {
     color: black;
     z-index: 2;
-    font-size: 10px;
+    font-size: 0.8rem;
     position: absolute;
 }
 
 .player-name {
-    top: 14%; 
+    top: 25%; 
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 0.9rem;
@@ -85,14 +85,14 @@
 }
 
 .player-rating {
-    top: 30%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .player-country {
-    top: 67%;
+    top: 80%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 1rem;
@@ -100,7 +100,7 @@
 }
 
 .player-position {
-    top: 95%;
+    top: 100%;
     transform: translate(-50%, -50%);
     font-size: 1rem;
     text-align: center;
@@ -109,4 +109,18 @@
     border-radius: 30%;
     background-color: rgb(179, 241, 179);
     border: 1px solid;
+}
+
+.replace-player-0 {
+    position:absolute;
+    top: 150px;
+    left: 0px;
+    margin-left: 100px;
+}
+
+.replace-player-1 {
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    margin-left: 100px;
 }
