@@ -23,7 +23,7 @@ const Player = ({playerInfo, index, replacedPlayers, customClass}) => {
       <img src={playerShirt} alt="Player Shirt" className='playerShirt'/>
       <p className='player-name'>{playerInfo.playerName}</p>
       <p className='player-rating'>{playerInfo.rating}</p>
-      <p className='player-country'>{playerInfo.country}</p>
+      <p className='player-country'>{playerInfo.countryCode}</p>
       <p className='player-position'>{playerInfo.position}</p>
     </div>
   );

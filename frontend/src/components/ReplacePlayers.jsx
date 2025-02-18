@@ -14,6 +14,7 @@ const ReplacePlayers = ({username, bothPlayers, setBothPlayers}) => {
                 newPlayerName: bothPlayers[1].playerName,
                 newPlayerRating: bothPlayers[1].rating,
                 newPlayerCountry: bothPlayers[1].country,
+                newPlayerCountryCode: bothPlayers[1].countryCode,
                 newPlayerPosition: bothPlayers[1].position
             }
             )

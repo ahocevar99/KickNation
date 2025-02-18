@@ -1,9 +1,9 @@
 import { User } from "./models/UserModel.js";
-import countries from './countries.json'
+import countries from './countries.json' with { type:"json" }
 
-getCountryCode = (country) => {
-  const country = countries.find(c => c.country.toLowerCase() === country.toLowerCase())
-  return country ? country.abbreviation : "XX"
+const getCountryCode = (country) => {
+  const foundCountry = countries.find(c => c.country.toLowerCase() === country.toLowerCase())
+  return foundCountry ? foundCountry.abbreviation : "XX"
 } 
 
 export const newPlayer = async () => {
@@ -66,6 +66,7 @@ export const createClub = async (name) => {
     squad.push({
       playerName: names[0].name,
       country: names[0].country,
+      countryCode: names[0].countryCode,
       rating: await playerRating(),
       position: "GK",
     });
@@ -73,6 +74,7 @@ export const createClub = async (name) => {
       squad.push({
         playerName: names[i].name,
         country: names[i].country,
+        countryCode: names[i].countryCode,
         rating: await playerRating(),
         position: "DEF",
       });
@@ -81,6 +83,7 @@ export const createClub = async (name) => {
       squad.push({
         playerName: names[i].name,
         country: names[i].country,
+        countryCode: names[1].countryCode,
         rating: await playerRating(),
         position: "MID",
       });
@@ -89,6 +92,7 @@ export const createClub = async (name) => {
       squad.push({
         playerName: names[i].name,
         country: names[i].country,
+        countryCode: names[1].countryCode,
         rating: await playerRating(),
         position: "ATT",
       });

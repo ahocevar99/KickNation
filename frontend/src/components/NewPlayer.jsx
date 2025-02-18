@@ -15,7 +15,8 @@ const NewPlayer = ({newPlayerInfo}) => {
                 <img src={playerShirt} alt="" />
                 <p className='new-player-name'>{newPlayerInfo.playerName}</p>
                 <p className='new-player-rating'>{newPlayerInfo.rating}</p>
-                <p className='new-player-country'>{newPlayerInfo.country}</p>
+                <p className='new-player-position'>{newPlayerInfo.position}</p>
+                <p className='new-player-country'>{newPlayerInfo.countryCode}</p>
             </div>
         </div>
     )

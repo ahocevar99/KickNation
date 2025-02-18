@@ -90,17 +90,17 @@ router.post("/register", async (req, res) => {
       password: hashedPassword,
       clubName: capitalizeFirstLetter(req.body.clubName), 
       squad: [
-        {playerName: names[0].name, country: names[0].country, rating: 50, position: "GK"},
-        {playerName: names[1].name, country: names[1].country, rating: 50, position: "DEF"},
-        {playerName: names[2].name, country: names[2].country, rating: 50, position: "DEF"},
-        {playerName: names[3].name, country: names[3].country, rating: 50, position: "DEF"},
-        {playerName: names[4].name, country: names[4].country, rating: 50, position: "DEF"},
-        {playerName: names[5].name, country: names[5].country, rating: 50, position: "MID"},
-        {playerName: names[6].name, country: names[6].country, rating: 50, position: "MID"},
-        {playerName: names[7].name, country: names[7].country, rating: 50, position: "MID"},
-        {playerName: names[8].name, country: names[8].country, rating: 50, position: "ATT"},
-        {playerName: names[9].name, country: names[9].country, rating: 50, position: "ATT"},
-        {playerName: names[10].name, country: names[10].country, rating: 50, position: "ATT"},
+        {playerName: names[0].name, country: names[0].country, countryCode: names[0].countryCode, rating: 50, position: "GK"},
+        {playerName: names[1].name, country: names[1].country, countryCode: names[1].countryCode, rating: 50, position: "DEF"},
+        {playerName: names[2].name, country: names[2].country, countryCode: names[2].countryCode,rating: 50, position: "DEF"},
+        {playerName: names[3].name, country: names[3].country, countryCode: names[3].countryCode,rating: 50, position: "DEF"},
+        {playerName: names[4].name, country: names[4].country, countryCode: names[4].countryCode,rating: 50, position: "DEF"},
+        {playerName: names[5].name, country: names[5].country, countryCode: names[5].countryCode,rating: 50, position: "MID"},
+        {playerName: names[6].name, country: names[6].country, countryCode: names[6].countryCode,rating: 50, position: "MID"},
+        {playerName: names[7].name, country: names[7].country, countryCode: names[7].countryCode,rating: 50, position: "MID"},
+        {playerName: names[8].name, country: names[8].country, countryCode: names[8].countryCode,rating: 50, position: "ATT"},
+        {playerName: names[9].name, country: names[9].country, countryCode: names[9].countryCode,rating: 50, position: "ATT"},
+        {playerName: names[10].name, country: names[10].country, countryCode: names[10].countryCode,rating: 50, position: "ATT"},
       ]
     };
     const user = await User.create(newUser);
@@ -175,8 +175,8 @@ router.get ("/buyPack", async (req,res) => {
     var rating1 = await functions.playerRating();
     var rating2 = await functions.playerRating()
     var squad = [
-      { playerName: names[0].name, country: names[0].country, rating: rating1, position: getRandomPosition() },
-      { playerName: names[1].name, country: names[1].country, rating: rating2, position: getRandomPosition() }
+      { playerName: names[0].name, country: names[0].country, countryCode: names[0].countryCode, rating: rating1, position: getRandomPosition() },
+      { playerName: names[1].name, country: names[1].country, countryCode: names[1].countryCode,rating: rating2, position: getRandomPosition() }
     ];
     console.log(squad)
     res.status (200).json({squad: squad})
@@ -219,7 +219,7 @@ router.get('/getData', async (req, res) => {
 
 router.put('/replacePlayer', async (req, res) => {
   try {
-    const { username, oldPlayerName, newPlayerName, newPlayerRating, newPlayerCountry, newPlayerPosition } = req.body;
+    const { username, oldPlayerName, newPlayerName, newPlayerRating, newPlayerCountry, newPlayerCountryCode, newPlayerPosition } = req.body;
     
     const currentUser = await User.findOne({ username });
     if (!currentUser || !currentUser.squad || currentUser.squad.length === 0) {
@@ -237,6 +237,7 @@ router.put('/replacePlayer', async (req, res) => {
     currentUser.squad[index].playerName = newPlayerName;
     currentUser.squad[index].rating = newPlayerRating;
     currentUser.squad[index].country = newPlayerCountry;
+    currentUser.squad[index].countryCode = newPlayerCountryCode;
     currentUser.squad[index].position = newPlayerPosition;
     
     await currentUser.save();
