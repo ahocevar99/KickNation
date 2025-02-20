@@ -5,10 +5,11 @@ import axios from 'axios'
 import NewPlayer from './NewPlayer.jsx';
 
 
-const Buy = () => {
+const Buy = ({alreadyReplaced}) => {
     const [money, setMoney] = useState();
     const [newPlayers, setNewPlayers] = useState([]);
     const [displayedPlayer, switchDisplayedPlayer] = useState(0);
+    const [alreadyReplacedPlayer, setAlreadyReplacedPlayer] = useState(alreadyReplaced)
     const location = useLocation();
     const { username } = location.state || {};
 
@@ -29,7 +30,13 @@ const Buy = () => {
 
     const changePlayer = () => {
         return (displayedPlayer == 0 ? switchDisplayedPlayer(1) : switchDisplayedPlayer(0))    
-    } 
+    }
+    
+    useEffect(() => {
+        for (player in newPlayers) {
+            if (player.playerName === alreadyReplaced.playerName) {player.playerName = "Zamenjan"}
+        }
+    }, [alreadyReplacedPlayer])
 
     const renderPlayer = (displayedPlayer) => {
         return newPlayers.length > 0 ? (

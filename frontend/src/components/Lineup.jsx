@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom'
 import Player from './Player';
 import ReplacePlayers from './ReplacePlayers';
 
-const Lineup = () => {
+const Lineup = ({setAlreadyReplaced}) => {
   const [players, setPlayers] = useState ([]);
   const location = useLocation();
   const {username} = location.state || {};
@@ -37,7 +37,7 @@ const Lineup = () => {
         <img src={soccerField} alt="Soccer Field" className="soccer-image" />
         {renderPlayers(players)}
         {bothPlayers.length>0? 
-          <ReplacePlayers username={username} bothPlayers={bothPlayers} setBothPlayers={setBothPlayers}/>:
+          <ReplacePlayers username={username} bothPlayers={bothPlayers} setBothPlayers={setBothPlayers} setAlreadyReplaced = {setAlreadyReplaced}/>:
           <div></div>
         }
       </div>

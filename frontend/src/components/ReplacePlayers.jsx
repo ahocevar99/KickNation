@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import Player from './Player'
 
 
-const ReplacePlayers = ({username, bothPlayers, setBothPlayers}) => {
+const ReplacePlayers = ({username, bothPlayers, setBothPlayers, setAlreadyReplaced}) => {
     const replacePlayerFunction = async () => {
         try {
             const response = await axios.put ("http://localhost:3000/replacePlayer", {
@@ -18,7 +18,9 @@ const ReplacePlayers = ({username, bothPlayers, setBothPlayers}) => {
                 newPlayerPosition: bothPlayers[1].position
             }
             )
+            setAlreadyReplaced(bothPlayers[0])
             setBothPlayers([])
+            
         } catch (error){
             console.log("Erroe replacing players: " + error)
         }

@@ -6,11 +6,11 @@ import '../styles/Navigation.css'
 
 
 const Home = () => {
-    const [playerReplaced, setPlayerReplaced] = useState();
+    const [alreadyReplaced, setAlreadyReplaced] = useState([]);
     return (
         <div className='nav-container'>
-            <Lineup />
-            <Buy />
+            <Lineup setAlreadyReplaced = {setAlreadyReplaced}/>
+            <Buy alreadyReplaced ={alreadyReplaced}/>
         </div>
     )
 }
