@@ -18,7 +18,7 @@ const ReplacePlayers = ({username, bothPlayers, setBothPlayers, setAlreadyReplac
                 newPlayerPosition: bothPlayers[1].position
             }
             )
-            setAlreadyReplaced(bothPlayers[0])
+            setAlreadyReplaced(bothPlayers[1])
             setBothPlayers([])
             
         } catch (error){

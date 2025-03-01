@@ -6,7 +6,7 @@ import asyncHandler from 'express-async-handler'
 import fetch from 'node-fetch';
 import * as functions from '../functions.js';
 export const router = Router();
-import * as gameLogic from '../gameLogic.js'
+
 
 
 const protect = asyncHandler (async (req,res,next) => {
@@ -32,7 +32,6 @@ const protect = asyncHandler (async (req,res,next) => {
 
 router.post("/login", (req, res) => {
     const { username, password } = req.body;
-    console.log(req.body)
     User.findOne({ username: username }).then((user) => {
       if (user) {
         bcrypt.compare(password, user.password, (err, response) => {
@@ -119,7 +118,6 @@ router.post("/register", async (req, res) => {
 router.get("/myTeam", async (req, res) => {
   try {
     const { username } = req.query; // Uporabimo query parameter
-    console.log(req.query)
     if (!username) {
       return res.status(400).json({ message: "Username is required" });
     }
@@ -178,7 +176,6 @@ router.get ("/buyPack", async (req,res) => {
       { playerName: names[0].name, country: names[0].country, countryCode: names[0].countryCode, rating: rating1, position: getRandomPosition() },
       { playerName: names[1].name, country: names[1].country, countryCode: names[1].countryCode,rating: rating2, position: getRandomPosition() }
     ];
-    console.log(squad)
     res.status (200).json({squad: squad})
     
   } catch (error) {
@@ -202,12 +199,14 @@ router.get('/getData', async (req, res) => {
       month: '2-digit',
       year: 'numeric'
     }).replace(/\//g, '.');
-
+    //let nationBonus = functions.calculateNationBonus(currentUser.squad)
     res.status(200).json({
       clubName: currentUser.clubName,
       money: currentUser.money,
       points: currentUser.points,
-      joinDate: formattedJoinDate // Use the formatted date
+      joinDate: formattedJoinDate, // Use the formatted date
+      nationBonus: functions.calculateNationBonus(currentUser.squad),
+      ratingBonus: functions.calculateRatingBonus(currentUser.squad)
     });
 
   } catch (error) {

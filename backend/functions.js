@@ -1,10 +1,10 @@
 import { User } from "./models/UserModel.js";
-import countries from './countries.json' with { type:"json" }
+import countries from './countries.json' with { type: "json" }
 
 const getCountryCode = (country) => {
   const foundCountry = countries.find(c => c.country.toLowerCase() === country.toLowerCase())
   return foundCountry ? foundCountry.abbreviation : "XX"
-} 
+}
 
 export const newPlayer = async () => {
   while (true) {
@@ -83,7 +83,7 @@ export const createClub = async (name) => {
       squad.push({
         playerName: names[i].name,
         country: names[i].country,
-        countryCode: names[1].countryCode,
+        countryCode: names[i].countryCode,
         rating: await playerRating(),
         position: "MID",
       });
@@ -92,7 +92,7 @@ export const createClub = async (name) => {
       squad.push({
         playerName: names[i].name,
         country: names[i].country,
-        countryCode: names[1].countryCode,
+        countryCode: names[i].countryCode,
         rating: await playerRating(),
         position: "ATT",
       });
@@ -110,4 +110,41 @@ export const createClub = async (name) => {
     return;
   }
 };
-export default { newPlayer, playerRating, createClub };
+
+export const calculateNationBonus =  (squad) => {
+  const calculatePartialBonus = (players, percentage) => {
+    let bonus = 0;
+    let obj = {}
+
+    for (let i = 0; i < players.length; i++) {
+      let code = players[i].countryCode;
+      if (obj[code]) obj[code] += 1
+      else {
+        obj[code] = 1;
+      }
+    }
+    let values = Object.values(obj)
+    values = values.filter(prev => prev - 1 > 0)
+    for (let i = 0; i < values.length; i++) {
+      bonus += values[i] * percentage;
+    }
+    bonus *= 1.1 - values.length / 10
+    return bonus
+  }
+  return Math.trunc(calculatePartialBonus(squad, 4.54545455) + calculatePartialBonus(squad.slice(1, 5), 5) + calculatePartialBonus(squad.slice(5, 8), 5) + calculatePartialBonus(squad.slice(8, 11), 5))
+  
+}
+
+export const calculateRatingBonus = (squad) => {
+  let bonus = 0;
+  for (let i = 0; i< squad.length; i++) {
+    bonus += squad[i].rating;
+  }
+  
+  return Math.trunc(bonus/11);
+}
+
+export const calculatePositionBonus = (squad) => {
+
+}
+export default { newPlayer, playerRating, createClub, calculateNationBonus, calculateRatingBonus, calculatePositionBonus };

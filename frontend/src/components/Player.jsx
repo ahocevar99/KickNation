@@ -20,7 +20,7 @@ const Player = ({playerInfo, index, replacedPlayers, customClass}) => {
   
   return (
     <div className = {`player-container pc-${index} ${customClass}`} onDrop={dragFunction} onDragOver={allowDrop}>
-      <img src={playerShirt} alt="Player Shirt" className='playerShirt'/>
+      <img src={playerShirt} alt="Player Shirt" className='player-shirt'/>
       <p className='player-name'>{playerInfo.playerName}</p>
       <p className='player-rating'>{playerInfo.rating}</p>
       <p className='player-country'>{playerInfo.countryCode}</p>

@@ -3,21 +3,20 @@ import '../styles/Buy.css'
 import { useLocation } from 'react-router-dom'
 import axios from 'axios'
 import NewPlayer from './NewPlayer.jsx';
+import Player from './Player.jsx';
 
 
 const Buy = ({alreadyReplaced}) => {
     const [money, setMoney] = useState();
     const [newPlayers, setNewPlayers] = useState([]);
     const [displayedPlayer, switchDisplayedPlayer] = useState(0);
-    const [alreadyReplacedPlayer, setAlreadyReplacedPlayer] = useState(alreadyReplaced)
     const location = useLocation();
     const { username } = location.state || {};
-
-
+    
+    
     const buyPack = async () => {
         const response = await axios.get(`http://localhost:3000/buyPack?username=${username}`);
         setNewPlayers(response.data.squad)
-        renderPlayer(displayedPlayer);
     }
 
     useEffect(() => {
@@ -28,15 +27,18 @@ const Buy = ({alreadyReplaced}) => {
         getMoney();
     }, [buyPack])
 
+    useEffect(() => {
+        if (alreadyReplaced && newPlayers.length > 0) {
+            setNewPlayers(prevPlayers => prevPlayers.filter(player => player.playerName !== alreadyReplaced.playerName));
+        }
+        switchDisplayedPlayer(0)
+    }, [alreadyReplaced]);
+
+
     const changePlayer = () => {
-        return (displayedPlayer == 0 ? switchDisplayedPlayer(1) : switchDisplayedPlayer(0))    
+        if (newPlayers.length == 2) return (displayedPlayer == 0 ? switchDisplayedPlayer(1) : switchDisplayedPlayer(0))    
     }
     
-    useEffect(() => {
-        for (player in newPlayers) {
-            if (player.playerName === alreadyReplaced.playerName) {player.playerName = "Zamenjan"}
-        }
-    }, [alreadyReplacedPlayer])
 
     const renderPlayer = (displayedPlayer) => {
         return newPlayers.length > 0 ? (
