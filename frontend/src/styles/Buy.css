@@ -1,10 +1,10 @@
 .buy-container {
     width: 500px;
-    height: 650px;
+    height: 630px;
     border: 1px solid rgb(0, 209, 35);;
     position: absolute;
     right: 40px;
-    top: 230px;
+    top: 280px;
     overflow: hidden;
     overflow-y: hidden;
     border-radius: 10px;
@@ -21,7 +21,7 @@
 .new-pack {
     position: absolute;
     width: 140px;
-    top: 130px;
+    top: 100px;
     left: 50%;
     transform: translate(-50%);
 }
@@ -49,7 +49,7 @@
 
 .new-player-container {
     position: relative;
-    top: 240px;
+    top: 220px;
     cursor: move;
 }
 .new-player-container img{

@@ -206,7 +206,8 @@ router.get('/getData', async (req, res) => {
       points: currentUser.points,
       joinDate: formattedJoinDate, // Use the formatted date
       nationBonus: functions.calculateNationBonus(currentUser.squad),
-      ratingBonus: functions.calculateRatingBonus(currentUser.squad)
+      ratingBonus: functions.calculateRatingBonus(currentUser.squad),
+      positionBonus: functions.calculatePositionBonus(currentUser.squad)
     });
 
   } catch (error) {
