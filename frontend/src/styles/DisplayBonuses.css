@@ -1,0 +1,8 @@
+.bonuses-container {
+    position: absolute;
+    top: 130px;
+    right: 40px;
+    width: 600px;
+    height: 140px;
+    border: 1px red solid;
+}
