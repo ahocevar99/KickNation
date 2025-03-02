@@ -4,5 +4,10 @@
     right: 40px;
     width: 600px;
     height: 140px;
-    border: 1px red solid;
+}
+
+.bonuses-container p {
+    color: white;
+    font-size: 1.8rem;
+    color: rgb(231, 231, 231);
 }
