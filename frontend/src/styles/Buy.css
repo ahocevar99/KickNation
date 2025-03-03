@@ -1,9 +1,9 @@
 .buy-container {
     width: 500px;
-    height: 630px;
-    border: 1px solid rgb(0, 209, 35);;
+    height: 230px;
     position: absolute;
-    right: 40px;
+    border: 2px solid green ;
+    left: 1300px;
     top: 280px;
     overflow: hidden;
     overflow-y: hidden;
@@ -42,6 +42,7 @@
 }
 
 .new-pack p {
+    margin-top: 10px;
     text-align: center;
     font-size: 1.2rem;
     color: rgb(231, 231, 231);
@@ -105,7 +106,8 @@
     display: flex;
     left: 50%;
     transform: translate(-50%);
-    color: rgb(224, 224, 224)
+    color: rgb(224, 224, 224);
+    visibility: hidden;
 }
 
 .new-player-arrows i {
