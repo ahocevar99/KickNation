@@ -102,9 +102,10 @@
     position: absolute;
     bottom: 10px;
     font-size: 3rem;
-    width: 100px;
+    width: 220px;
     display: flex;
-    left: 50%;
+    justify-content: space-evenly;
+    left: 60%;
     transform: translate(-50%);
     color: rgb(224, 224, 224);
     visibility: hidden;
@@ -112,8 +113,12 @@
 
 .new-player-arrows i {
     cursor: pointer;
+    margin: 0px 10px;
 }
 
+.new-player-arrows i:hover {
+    color: rgba(212, 212, 212, 0.61);
+}
 
 .npc-0 {
     visibility: visible;

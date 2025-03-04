@@ -19,7 +19,7 @@
    position: absolute;
    top: 20%;
    left: 240px;
-   background-color: aqua;
+   background-color: rgb(128, 128, 128);
    border-radius: 20px;
    border: 1px solid red;
    z-index: 2;

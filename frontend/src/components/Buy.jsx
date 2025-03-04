@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom'
 import axios from 'axios'
 import NewPlayer from './NewPlayer.jsx';
 import Player from './Player.jsx';
+import { newPlayer } from '../../../backend/functions.js';
 
 
 const Buy = ({alreadyReplaced}) => {
@@ -38,11 +39,23 @@ const Buy = ({alreadyReplaced}) => {
         switchDisplayedPlayer(0)
     }, [alreadyReplaced]);
 
+    useEffect (() => {
+        if (newPlayers.length == 0) setVisibility(false)
+    }, [newPlayers])
+
 
     const changePlayer = () => {
         if (newPlayers.length == 2) return (displayedPlayer == 0 ? switchDisplayedPlayer(1) : switchDisplayedPlayer(0))    
     }
-    
+
+    const cancelPlayer = () => {
+        const updatedPlayers = [...newPlayers];
+        updatedPlayers.splice(displayedPlayer, 1);
+        console.log(updatedPlayers)
+        setNewPlayers(updatedPlayers);
+        switchDisplayedPlayer(0)
+
+    }
 
     const renderPlayer = (displayedPlayer) => {
         return newPlayers.length > 0 ? (
@@ -62,9 +75,9 @@ const Buy = ({alreadyReplaced}) => {
             <div>
                 {renderPlayer(displayedPlayer)}
             </div>
-            <div className="new-player-arrows" style={{visibility : isVisible? "visible": "hidden"}} >
-                <i className="fa-solid fa-arrow-left" onClick={() => changePlayer()}></i>
-                <i className="fa-solid fa-arrow-right" onClick={() => changePlayer()}></i>
+            <div className="new-player-arrows" >
+                <i className="fa-solid fa-xmark" style={{visibility : isVisible? "visible": "hidden"}} onClick={() => cancelPlayer()}></i>
+                <i className="fa-solid fa-arrow-right" style={{visibility : isVisible && newPlayers.length === 2 ? "visible": "hidden"}} onClick={() => changePlayer()}></i>
             </div>
         </div>
     )

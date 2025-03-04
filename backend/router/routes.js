@@ -176,6 +176,7 @@ router.get ("/buyPack", async (req,res) => {
       { playerName: names[0].name, country: names[0].country, countryCode: names[0].countryCode, rating: rating1, position: getRandomPosition() },
       { playerName: names[1].name, country: names[1].country, countryCode: names[1].countryCode,rating: rating2, position: getRandomPosition() }
     ];
+    console.log(squad)
     res.status (200).json({squad: squad})
     
   } catch (error) {
