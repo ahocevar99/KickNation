@@ -147,20 +147,23 @@ export const calculateRatingBonus = (squad) => {
 export const calculatePositionBonus = (squad) => {
   let bonus = 1;
   for (let i = 0; i<squad.length; i++) {
-    if (i === 0 && !squad[i].position ==="GK") bonus *= 0.5;
+    if (i === 0 && squad[i].position !="GK") bonus *= 0.5;
     if (i===1 || i ===2 || i === 3 || i===4) {
       if (squad[i].position === "MID") bonus*=0.9
       if (squad[i].position === "ATT") bonus*=0.8
+      if (squad[i].position === "GK") bonus*=0.6
     }
     if (i===5 || i ===6 || i === 7) {
       if (squad[i].position === "DEF") bonus*=0.9
       if (squad[i].position === "ATT") bonus*=0.9
+      if (squad[i].position === "GK") bonus*=0.6
     }
     if (i===8 || i ===9 || i === 10) {
       if (squad[i].position === "DEF") bonus*=0.8
       if (squad[i].position === "MID") bonus*=0.9
+      if (squad[i].position === "GK") bonus*=0.6
     }
   }
-  return bonus*100;
+  return Math.floor(bonus*100);
 }
 export default { newPlayer, playerRating, createClub, calculateNationBonus, calculateRatingBonus, calculatePositionBonus };
