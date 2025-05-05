@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { User } from "../models/UserModel.js";
+import { Player } from "../models/PlayerModel.js";
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken'
 import asyncHandler from 'express-async-handler'
@@ -76,7 +77,8 @@ router.post("/register", async (req, res) => {
     const names = [];
     
     while (names.length < 11) {
-      const newPlayerData = await functions.newPlayer();
+      const newPlayerData = await Player.findOne({});
+      await Player.deleteOne({_id : newPlayerData._id})
       names.push(newPlayerData);
     }
 
@@ -89,17 +91,17 @@ router.post("/register", async (req, res) => {
       password: hashedPassword,
       clubName: capitalizeFirstLetter(req.body.clubName), 
       squad: [
-        {playerName: names[0].name, country: names[0].country, countryCode: names[0].countryCode, rating: 50, position: "GK"},
-        {playerName: names[1].name, country: names[1].country, countryCode: names[1].countryCode, rating: 50, position: "DEF"},
-        {playerName: names[2].name, country: names[2].country, countryCode: names[2].countryCode,rating: 50, position: "DEF"},
-        {playerName: names[3].name, country: names[3].country, countryCode: names[3].countryCode,rating: 50, position: "DEF"},
-        {playerName: names[4].name, country: names[4].country, countryCode: names[4].countryCode,rating: 50, position: "DEF"},
-        {playerName: names[5].name, country: names[5].country, countryCode: names[5].countryCode,rating: 50, position: "MID"},
-        {playerName: names[6].name, country: names[6].country, countryCode: names[6].countryCode,rating: 50, position: "MID"},
-        {playerName: names[7].name, country: names[7].country, countryCode: names[7].countryCode,rating: 50, position: "MID"},
-        {playerName: names[8].name, country: names[8].country, countryCode: names[8].countryCode,rating: 50, position: "ATT"},
-        {playerName: names[9].name, country: names[9].country, countryCode: names[9].countryCode,rating: 50, position: "ATT"},
-        {playerName: names[10].name, country: names[10].country, countryCode: names[10].countryCode,rating: 50, position: "ATT"},
+        {playerName: names[0].playerName, country: names[0].country, countryCode: names[0].countryCode, rating: 50, position: "GK"},
+        {playerName: names[1].playerName, country: names[1].country, countryCode: names[1].countryCode, rating: 50, position: "DEF"},
+        {playerName: names[2].playerName, country: names[2].country, countryCode: names[2].countryCode,rating: 50, position: "DEF"},
+        {playerName: names[3].playerName, country: names[3].country, countryCode: names[3].countryCode,rating: 50, position: "DEF"},
+        {playerName: names[4].playerName, country: names[4].country, countryCode: names[4].countryCode,rating: 50, position: "DEF"},
+        {playerName: names[5].playerName, country: names[5].country, countryCode: names[5].countryCode,rating: 50, position: "MID"},
+        {playerName: names[6].playerName, country: names[6].country, countryCode: names[6].countryCode,rating: 50, position: "MID"},
+        {playerName: names[7].playerName, country: names[7].country, countryCode: names[7].countryCode,rating: 50, position: "MID"},
+        {playerName: names[8].playerName, country: names[8].country, countryCode: names[8].countryCode,rating: 50, position: "ATT"},
+        {playerName: names[9].playerName, country: names[9].country, countryCode: names[9].countryCode,rating: 50, position: "ATT"},
+        {playerName: names[10].playerName, country: names[10].country, countryCode: names[10].countryCode,rating: 50, position: "ATT"},
       ]
     };
     const user = await User.create(newUser);
@@ -162,21 +164,17 @@ router.get ("/buyPack", async (req,res) => {
     await currentUser.save();
     const names = [];
     while (names.length < 2) {
-      const newPlayerData = await functions.newPlayer();
+      const newPlayerData = await Player.findOne({})
+      await Player.deleteOne({_id : newPlayerData._id})
+      newPlayerData.position = await functions.playerPosition();
+      newPlayerData.rating = await functions.playerRating();
       names.push(newPlayerData);
     }
-    const positions = ["GK", "DEF", "DEF", "DEF", "MID", "MID", "MID", "ATT", "ATT", "ATT"];
-    const getRandomPosition = () => {
-      const randomIndex = Math.floor(Math.random() * positions.length);
-      return positions[randomIndex];
-    };
-    var rating1 = await functions.playerRating();
-    var rating2 = await functions.playerRating()
+    
     var squad = [
-      { playerName: names[0].name, country: names[0].country, countryCode: names[0].countryCode, rating: rating1, position: getRandomPosition() },
-      { playerName: names[1].name, country: names[1].country, countryCode: names[1].countryCode,rating: rating2, position: getRandomPosition() }
+      { playerName: names[0].playerName, country: names[0].country, countryCode: names[0].countryCode, rating: names[0].rating, position: names[0].position },
+      { playerName: names[1].playerName, country: names[1].country, countryCode: names[1].countryCode,rating: names[1].rating, position: names[1].position }
     ];
-    console.log(squad)
     res.status (200).json({squad: squad})
     
   } catch (error) {
@@ -200,13 +198,14 @@ router.get('/getData', async (req, res) => {
       month: '2-digit',
       year: 'numeric'
     }).replace(/\//g, '.');
-    //let nationBonus = functions.calculateNationBonus(currentUser.squad)
+    const [nationBonus, nations] = functions.calculateNationBonus(currentUser.squad)
     res.status(200).json({
       clubName: currentUser.clubName,
       money: currentUser.money,
       points: currentUser.points,
       joinDate: formattedJoinDate, // Use the formatted date
-      nationBonus: functions.calculateNationBonus(currentUser.squad),
+      nationBonus: nationBonus,
+      nations: nations,
       ratingBonus: functions.calculateRatingBonus(currentUser.squad),
       positionBonus: functions.calculatePositionBonus(currentUser.squad)
     });
@@ -217,6 +216,27 @@ router.get('/getData', async (req, res) => {
   }
 });
 
+router.get('/calculateBonusesWhenReplacing', async (req,res) => {
+  try {
+    const username = req.query.username;
+    const oldPlayer = req.query.oldPlayer;
+    const newPlayer = JSON.parse(req.query.newPlayer)
+    const user = await User.findOne({username})
+    const currentUserSquad = user.squad;
+    for (let i = 0; i<11; i++) {
+      if (currentUserSquad[i]._id.toString() === oldPlayer) {
+        currentUserSquad[i] = newPlayer
+      }
+    }
+    res.status(200).json({nationBonus: functions.calculateNationBonus(currentUserSquad),
+      ratingBonus: functions.calculateRatingBonus(currentUserSquad), 
+      positionBonus: functions.calculatePositionBonus(currentUserSquad)
+    })
+  }catch (error) {
+    console.log(error.message);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+})
 
 router.put('/replacePlayer', async (req, res) => {
   try {

@@ -4,7 +4,7 @@
     position: absolute;
     border: 2px solid green ;
     left: 1300px;
-    top: 280px;
+    top: 330px;
     overflow: hidden;
     overflow-y: hidden;
     border-radius: 10px;
@@ -15,7 +15,7 @@
     left: 20px;
     top: 20px;
     font-size: 2rem;
-    color: rgb(231, 231, 231);
+    color: rgb(202, 202, 202);
 }
 
 .new-pack {
@@ -32,7 +32,7 @@
     cursor: pointer;
     font-size: 17px;
     background-color: inherit;
-    color: rgb(231, 231, 231);
+    color: rgb(202, 202, 202);
     border-radius: 15px;
     border: 3px solid rgb(0, 209, 35);
 }
@@ -45,7 +45,7 @@
     margin-top: 10px;
     text-align: center;
     font-size: 1.2rem;
-    color: rgb(231, 231, 231);
+    color: rgb(202, 202, 202);
 }
 
 .new-player-container {
@@ -55,38 +55,41 @@
 }
 .new-player-container img{
     position: absolute;
-    width: 320px;
+    width: 250px;
     left: 50%;
     transform: translate(-50%);
 }
 
 .new-player-name {
     position: absolute;
-    font-size: 1.6rem;
-    top: 40px;
+    font-size: 1.3rem;
+    top: 35px;
     width: 500px;
     text-align: center;
+    color: rgb(70, 70, 70);
 }
 
 .new-player-rating {
     position: absolute;
-    font-size: 3.3rem;
-    top: 110px;
+    font-size: 3rem;
+    top: 90px;
     width: 500px;
     text-align: center;
+    color: rgb(70, 70, 70);
 }
 
 .new-player-country {
     position: absolute;
-    font-size: 1.6rem;
-    top: 230px;
+    font-size: 1.3rem;
+    top: 170px;
     width: 500px;
     text-align: center;
+    color: rgb(70, 70, 70);
 }
 
 .new-player-position {
     position: absolute;
-    top: 287px;
+    top: 220px;
     font-size: 1.4rem;
     text-align: center;
     left: 50%;
@@ -96,18 +99,19 @@
     background-color: rgb(179, 241, 179);
     border: 1px solid;
     width: 60px;
+    color: rgb(70, 70, 70);
 }
 
 .new-player-arrows {
     position: absolute;
-    bottom: 10px;
-    font-size: 3rem;
+    bottom: 25px;
+    font-size: 2.5rem;
     width: 220px;
     display: flex;
     justify-content: space-evenly;
     left: 60%;
     transform: translate(-50%);
-    color: rgb(224, 224, 224);
+    color: rgb(202, 202, 202);
     visibility: hidden;
 }
 
@@ -117,7 +121,7 @@
 }
 
 .new-player-arrows i:hover {
-    color: rgba(212, 212, 212, 0.61);
+    color: rgba(150, 150, 150, 0.61);
 }
 
 .npc-0 {

@@ -7,27 +7,36 @@ import Player from './Player.jsx';
 import { newPlayer } from '../../../backend/functions.js';
 
 
-const Buy = ({alreadyReplaced}) => {
+const Buy = ({ alreadyReplaced }) => {
     const [money, setMoney] = useState();
     const [newPlayers, setNewPlayers] = useState([]);
     const [displayedPlayer, switchDisplayedPlayer] = useState(0);
     const [isVisible, setVisibility] = useState(false)
+    const [hasMoney, setHasMoney] = useState(true)
+    const [noMoney, setNoMoney] = useState(false)
     const location = useLocation();
     const { username } = location.state || {};
-    
-    
+
+
     const buyPack = async () => {
-        setNewPlayers([])
-        setVisibility(false)
-        const response = await axios.get(`http://localhost:3000/buyPack?username=${username}`);
-        setNewPlayers(response.data.squad)
-        setVisibility(true)
+        if (hasMoney) {
+            setNewPlayers([])
+            setVisibility(false)
+            const response = await axios.get(`http://localhost:3000/buyPack?username=${username}`);
+            setNewPlayers(response.data.squad)
+            setVisibility(true)
+        }
+        else {
+            setNewPlayers([])
+            noMoneyWarning()
+        }
     }
 
     useEffect(() => {
         const getMoney = async () => {
             const response = (await axios.get(`http://localhost:3000/getData?username=${username}`));
             setMoney(response.data.money)
+            if (money < 100) setHasMoney(false)
         }
         getMoney();
     }, [buyPack])
@@ -39,13 +48,13 @@ const Buy = ({alreadyReplaced}) => {
         switchDisplayedPlayer(0)
     }, [alreadyReplaced]);
 
-    useEffect (() => {
+    useEffect(() => {
         if (newPlayers.length == 0) setVisibility(false)
     }, [newPlayers])
 
 
     const changePlayer = () => {
-        if (newPlayers.length == 2) return (displayedPlayer == 0 ? switchDisplayedPlayer(1) : switchDisplayedPlayer(0))    
+        if (newPlayers.length == 2) return (displayedPlayer == 0 ? switchDisplayedPlayer(1) : switchDisplayedPlayer(0))
     }
 
     const cancelPlayer = () => {
@@ -57,16 +66,41 @@ const Buy = ({alreadyReplaced}) => {
 
     }
 
+    const noMoneyWarning = () => {
+        setNoMoney(true)
+        setTimeout(() => {
+            setNoMoney(false)
+        }, 100)
+        setTimeout(() => {
+            setNoMoney(true)
+        }, 200)
+        setTimeout(() => {
+            setNoMoney(false)
+        }, 300)
+        setTimeout(() => {
+            setNoMoney(true)
+        }, 400)
+        setTimeout(() => {
+            setNoMoney(false)
+        }, 500)
+        setTimeout(() => {
+            setNoMoney(true)
+        }, 600)
+        setTimeout(() => {
+            setNoMoney(false)
+        }, 700)
+    }
+
     const renderPlayer = (displayedPlayer) => {
         return newPlayers.length > 0 ? (
-        <NewPlayer newPlayerInfo={newPlayers[displayedPlayer]}/>
+            <NewPlayer newPlayerInfo={newPlayers[displayedPlayer]} />
         ) : <div></div>
     }
 
     return (
-        <div className='buy-container' style={{height : isVisible? "630px" : "230px"}}>
+        <div className='buy-container' style={{ height: isVisible ? "585px" : "230px" }}>
             <div className='money-counter'>
-                <p>Money: {money} $</p>
+                <p>Money: <span style={{ color: noMoney ? "red" : "rgb(202, 202, 202)" }}>{money} $ </span></p>
             </div>
             <div className='new-pack'>
                 <button onClick={buyPack}>New Pack</button>
@@ -76,8 +110,8 @@ const Buy = ({alreadyReplaced}) => {
                 {renderPlayer(displayedPlayer)}
             </div>
             <div className="new-player-arrows" >
-                <i className="fa-solid fa-xmark" style={{visibility : isVisible? "visible": "hidden"}} onClick={() => cancelPlayer()}></i>
-                <i className="fa-solid fa-arrow-right" style={{visibility : isVisible && newPlayers.length === 2 ? "visible": "hidden"}} onClick={() => changePlayer()}></i>
+                <i className="fa-solid fa-xmark" style={{ visibility: isVisible ? "visible" : "hidden" }} onClick={() => cancelPlayer()}></i>
+                <i className="fa-solid fa-arrow-right" style={{ visibility: isVisible && newPlayers.length === 2 ? "visible" : "hidden" }} onClick={() => changePlayer()}></i>
             </div>
         </div>
     )

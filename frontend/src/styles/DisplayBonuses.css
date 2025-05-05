@@ -1,13 +1,30 @@
 .bonuses-container {
     position: absolute;
-    top: 130px;
+    top: 125px;
     left: 1300px;
     width: 600px;
     height: 140px;
+    display: flex;
+}
+
+.bonuses-right-side {
+    position: absolute;
+    left: 50%;
 }
 
 .bonuses-container p {
-    color: white;
     font-size: 1.8rem;
-    color: rgb(231, 231, 231);
+    color: rgb(202, 202, 202);
+}
+
+.nations-left-side {
+    color: rgb(202, 202, 202);
+    font-size: 1.2rem;
+}
+
+.nations-right-side {
+    position: absolute;
+    left: 180px;
+    color: rgb(202, 202, 202);
+    font-size: 1.2rem;
 }

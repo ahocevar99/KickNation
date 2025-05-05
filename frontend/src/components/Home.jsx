@@ -13,20 +13,22 @@ const Home = () => {
     const [nationBonus, setNationBonus] = useState(0);
     const [ratingBonus, setRatingBonus] = useState(0);
     const [positionBonus, setPositionBonus] = useState(0);
+    const [nations, setNations] = useState ({})
     useEffect(() => { 
         const fetchBonus = async () => {
             const response = await axios.get(`http://localhost:3000/getData?username=${username}`)
             setNationBonus(response.data.nationBonus)
             setRatingBonus(response.data.ratingBonus)
             setPositionBonus(response.data.positionBonus)
+            setNations(response.data.nations)
         }
         fetchBonus()
     }, [alreadyReplaced])
 
     return (
         <div>
-            <Lineup setAlreadyReplaced={setAlreadyReplaced} />
-            <DisplayBonuses nationBonus={nationBonus} ratingBonus={ratingBonus} positionBonus={positionBonus} />
+            <Lineup setAlreadyReplaced={setAlreadyReplaced} nationBonus={nationBonus} ratingBonus={ratingBonus} positionBonus={positionBonus}/>
+            <DisplayBonuses nationBonus={nationBonus} ratingBonus={ratingBonus} positionBonus={positionBonus} nations={nations}/>
             <Buy alreadyReplaced={alreadyReplaced} />
         </div>
     )
