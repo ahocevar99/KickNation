@@ -2,7 +2,6 @@ import React from 'react'
 import '../styles/DisplayBonuses.css'
 
 const DisplayBonuses = ({ nationBonus, ratingBonus, positionBonus, nations }) => {
-  console.log(nations)
   return (
     <div className='bonuses-container'>
       <div className='bonuses-left-side'>

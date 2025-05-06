@@ -29,7 +29,7 @@ const Login = () => {
 
     return (
         <div className='min-h-screen flex flex-col justify-between'>
-            <div className='mt-[10rem] h-[35rem] w-[30rem] justify-center items-center lg:flex lg:flex-row lg:w-[60rem] xl:w-[70rem] 2xl:w-[80rem] m-auto border border-white lg:border-black rounded-[1rem] lg:justify-evenly shadow-2xl md:w-[40rem] sm:w-[30rem]'>
+            <div className='mt-[10rem] h-[35rem] w-[30rem] justify-center items-center lg:flex lg:flex-row lg:w-[60rem] xl:w-[70rem] 2xl:w-[80rem] m-auto border border-white lg:border-gray-800 rounded-[1rem] lg:justify-evenly shadow-2xl md:w-[40rem] sm:w-[30rem]'>
                 <div className='hidden lg:block lg:w-[60rem] h-[35rem]'>
                     <img src={titlePhoto} alt="" className='w-full h-full object-cover rounded-l-[1rem]' />
                 </div>

@@ -44,7 +44,7 @@ const ReplacePlayers = ({ username, bothPlayers, setBothPlayers, setAlreadyRepla
         setBothPlayers([])
     }
     return (
-        <div className='replace-players-container bg-gray-900'>
+        <div className='replace-players-container bg-gray-950'>
             <span className='replace-title'>Choose 1 player</span>
             <div className='replace-underline'></div>
             <div className='replace-players-flex'>
